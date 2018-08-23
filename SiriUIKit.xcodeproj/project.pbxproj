@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12414EC9212F7E76001F753F /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12414EC8212F7E76001F753F /* Animator.swift */; };
+		12414ECC212F7EB1001F753F /* DurationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12414ECB212F7EB1001F753F /* DurationAnimator.swift */; };
+		12414ECE212F7EC5001F753F /* LinearAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12414ECD212F7EC5001F753F /* LinearAnimator.swift */; };
+		12414ED0212F7F04001F753F /* Range+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12414ECF212F7F04001F753F /* Range+Animation.swift */; };
 		70719A19212ED3400068E334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70719A18212ED3400068E334 /* AppDelegate.swift */; };
 		70719A1B212ED3400068E334 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70719A1A212ED3400068E334 /* ViewController.swift */; };
 		70719A1E212ED3400068E334 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70719A1C212ED3400068E334 /* Main.storyboard */; };
@@ -27,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		12414EC8212F7E76001F753F /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		12414ECB212F7EB1001F753F /* DurationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationAnimator.swift; sourceTree = "<group>"; };
+		12414ECD212F7EC5001F753F /* LinearAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearAnimator.swift; sourceTree = "<group>"; };
+		12414ECF212F7F04001F753F /* Range+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Range+Animation.swift"; sourceTree = "<group>"; };
 		70719A15212ED3400068E334 /* SiriUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SiriUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70719A18212ED3400068E334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70719A1A212ED3400068E334 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +67,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12414ECA212F7E93001F753F /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				12414EC8212F7E76001F753F /* Animator.swift */,
+				12414ECB212F7EB1001F753F /* DurationAnimator.swift */,
+				12414ECD212F7EC5001F753F /* LinearAnimator.swift */,
+				12414ECF212F7F04001F753F /* Range+Animation.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
 		70719A0C212ED3400068E334 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +100,7 @@
 		70719A17212ED3400068E334 /* SiriUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				12414ECA212F7E93001F753F /* Animator */,
 				70719A18212ED3400068E334 /* AppDelegate.swift */,
 				70719A1F212ED3420068E334 /* Assets.xcassets */,
 				70719A24212ED3420068E334 /* Info.plist */,
@@ -202,9 +222,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12414ECC212F7EB1001F753F /* DurationAnimator.swift in Sources */,
+				12414EC9212F7E76001F753F /* Animator.swift in Sources */,
 				70719A1B212ED3400068E334 /* ViewController.swift in Sources */,
 				70719A19212ED3400068E334 /* AppDelegate.swift in Sources */,
+				12414ED0212F7F04001F753F /* Range+Animation.swift in Sources */,
 				70719A39212ED3610068E334 /* SiriQueryView.swift in Sources */,
+				12414ECE212F7EC5001F753F /* LinearAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -352,7 +376,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

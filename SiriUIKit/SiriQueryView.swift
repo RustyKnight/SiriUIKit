@@ -31,8 +31,7 @@ internal let cgRandMax = CGFloat(RAND_MAX)
 
 public class SiriQueryView: UIView {
 	
-	internal static let numberOfElements = 10
-	internal static let numberOfColors = 6
+//	internal static let numberOfElements = 10
 	internal static let colors: [[CGFloat]] = [
 		[32, 133, 252],
 		[94, 252, 169],
@@ -44,19 +43,21 @@ public class SiriQueryView: UIView {
 	
 	internal static let k: CGFloat = 0.5
 	internal static let numberOfWaves = 6
-	internal static let speed = 2
+	public var speed = 1
 	
-	public var tick: [Int] = Array(repeating: 0, count: SiriQueryView.numberOfElements)
-	public var tickLimit: [Int] = Array(repeating: 0, count: SiriQueryView.numberOfElements)
-	public var amp: [CGFloat] = Array(repeating: 0, count: SiriQueryView.numberOfElements)
-	public var pos: [CGFloat] = Array(repeating: 0, count: SiriQueryView.numberOfElements)
-	public var colors: [[CGFloat]] = Array(repeating: Array(repeating: 0, count: 3), count: SiriQueryView.numberOfColors)
+	public var tick: [Int] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
+	public var tickLimit: [Int] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
+	public var amp: [CGFloat] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
+	public var pos: [CGFloat] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
+	public var colors: [[CGFloat]] = Array(repeating: Array(repeating: 0, count: 3), count: SiriQueryView.numberOfWaves)
 	
 	public var volumn: CGFloat = 0.0 {
 		didSet {
 			setNeedsDisplay()
 		}
 	}
+	
+	private var animator: LinearAnimator?;
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -73,13 +74,31 @@ public class SiriQueryView: UIView {
 		for i in 0..<SiriQueryView.numberOfWaves {
 			generateRandomPos(at: i)
 		}
-		refreshView()
+		//refreshView()
+	}
+	
+	public func start() {
+		guard animator == nil else {
+			return
+		}
+		animator = LinearAnimator()
+		animator?.delegate = self
+		animator?.start()
+	}
+	
+	public func stop() {
+		guard let animator = animator else {
+			return
+		}
+		animator.stop()
+		animator.delegate = nil
+		self.animator = nil
 	}
 	
 	internal func commonRandom(at i: Int) {
 		tickLimit[i] = Int.random(in: 0..<Int.max) % 10 + 41
 		amp[i] = CGFloat(Int32.positiveRandom) * 0.5 / cgRandMax + 0.5
-		let index = Int(Int32.positiveRandom) % SiriQueryView.numberOfColors
+		let index = Int(Int32.positiveRandom) % SiriQueryView.numberOfWaves
 		for j in 0..<3 {
 			colors[i][j] = SiriQueryView.colors[index][j]
 		}
@@ -99,7 +118,7 @@ public class SiriQueryView: UIView {
 	
 	internal func nextState() {
 		for i in 0..<SiriQueryView.numberOfWaves {
-			tick[i] += SiriQueryView.speed
+			tick[i] += speed
 			guard tick[i] >= tickLimit[i] else {
 				continue
 			}
@@ -109,11 +128,11 @@ public class SiriQueryView: UIView {
 		}
 	}
 	
-	@objc public func refreshView() {
-		setNeedsDisplay()
-		// CADisplay link :/
-		perform(#selector(refreshView), with: nil, afterDelay: 0.02)
-	}
+//	@objc public func refreshView() {
+//		setNeedsDisplay()
+//		// CADisplay link :/
+//		perform(#selector(refreshView), with: nil, afterDelay: 0.02)
+//	}
 	
 	internal func yPos(at x: CGFloat, index: Int) -> CGFloat {
 		var gfn = pow(SiriQueryView.k / (SiriQueryView.k + pow(x, 2)), 2)
@@ -184,7 +203,16 @@ public class SiriQueryView: UIView {
 			drawOneWave(at: wave)
 		}
 
+		//nextState()
+	}
+	
+}
+
+extension SiriQueryView: LinearAnimatorDelegate {
+	
+	public func didTick(Animator: LinearAnimator) {
 		nextState()
+		setNeedsDisplay()
 	}
 	
 }

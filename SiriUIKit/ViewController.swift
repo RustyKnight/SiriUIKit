@@ -18,6 +18,11 @@ class ViewController: UIViewController {
 		siriQueryView.volumn = 0.05
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		siriQueryView.start()
+	}
+	
 	@IBAction func sliderChanged(_ sender: Any) {
 		siriQueryView.volumn = CGFloat(slider.value)
 	}
