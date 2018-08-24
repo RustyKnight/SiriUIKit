@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,16 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.050000000000000003" minValue="0.050000000000000003" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="WtS-46-vX1">
-                                <rect key="frame" x="35.5" y="391.5" width="304" height="31"/>
+                                <rect key="frame" x="35.5" y="371.5" width="304" height="31"/>
                                 <connections>
                                     <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="feg-wB-Am3"/>
                                 </connections>
                             </slider>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1UX-sm-WZh" customClass="SiriQueryView" customModule="SiriUIKit" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="283.5" width="300" height="100"/>
+                                <rect key="frame" x="37.5" y="303.5" width="300" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="1UX-sm-WZh" secondAttribute="height" multiplier="3:1" id="0nO-RS-9Pd"/>
+                                    <constraint firstAttribute="width" secondItem="1UX-sm-WZh" secondAttribute="height" multiplier="5:1" id="0nO-RS-9Pd"/>
                                     <constraint firstAttribute="width" constant="300" id="1CH-bH-83w"/>
                                 </constraints>
                             </view>

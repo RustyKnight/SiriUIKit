@@ -49,7 +49,7 @@ public class SiriQueryView: UIView {
 	public var tickLimit: [Int] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
 	public var amp: [CGFloat] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
 	public var pos: [CGFloat] = Array(repeating: 0, count: SiriQueryView.numberOfWaves)
-	public var colors: [[CGFloat]] = Array(repeating: Array(repeating: 0, count: 3), count: SiriQueryView.numberOfWaves)
+	public var colors: [[CGFloat]] = Array(repeating: Array(repeating: 0, count: 4), count: SiriQueryView.numberOfWaves)
 	
 	public var volumn: CGFloat = 0.0 {
 		didSet {
@@ -102,6 +102,7 @@ public class SiriQueryView: UIView {
 		for j in 0..<3 {
 			colors[i][j] = SiriQueryView.colors[index][j]
 		}
+		colors[i][3] = CGFloat.random(in: 102...153)
 	}
 	
 	internal func generateRandomTick() {
@@ -168,24 +169,31 @@ public class SiriQueryView: UIView {
 		context.addPath(path)
 		context.clip()
 
-		let components: [CGFloat] = [
-			1.0, 1.0, 1.0, 0.8,
-			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.6,
-			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.4
-		]
-		let colorSpace = CGColorSpaceCreateDeviceRGB()
-		let locations: [CGFloat] = [0.5, 0.05, 1.0]
-		guard let gradient = CGGradient(colorSpace: colorSpace,
-																		colorComponents: components,
-																		locations: locations,
-																		count: 3) else {
-																			fatalError("Could not create gradient")
-		}
+//		let components: [CGFloat] = [
+//			1.0, 1.0, 1.0, 0.8,
+//			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.6,
+//			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.4
+//		]
+//		let colorSpace = CGColorSpaceCreateDeviceRGB()
+//		let locations: [CGFloat] = [0.5, 0.05, 1.0]
+//		guard let gradient = CGGradient(colorSpace: colorSpace,
+//																		colorComponents: components,
+//																		locations: locations,
+//																		count: 3) else {
+//																			fatalError("Could not create gradient")
+//		}
+//
+//		let startPoint = CGPoint(x: width / 2, y: height / 2)
+//		let endPoint = CGPoint(x: width / 2, y: height / 2 - (height * CGFloat(sign) / 2))
+//		context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+
+//		let alpha = CGFloat.random(in: 0.4...0.6)
 		
-		let startPoint = CGPoint(x: width / 2, y: height / 2)
-		let endPoint = CGPoint(x: width / 2, y: height / 2 - (height * CGFloat(sign) / 2))
-		
-		context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+		let delta = min(1, max(0, amp[index] * volumn))
+		let alpha = 1 - min(1, max(0, (colors[index][3] / 256.0) * delta))
+		let color = UIColor(red: colors[index][0] / 256.0, green: colors[index][1] / 256.0, blue: colors[index][2] / 256.0, alpha: alpha)
+		color.setFill()
+		context.fill(CGRect(x: 0, y: 0, width: width, height: height))
 		context.restoreGState()
 	}
 	
@@ -215,4 +223,39 @@ extension SiriQueryView: LinearAnimatorDelegate {
 		setNeedsDisplay()
 	}
 	
+}
+
+public extension UIColor {
+	public func colorWithBrightness(brightness: CGFloat) -> UIColor {
+		var H: CGFloat = 0, S: CGFloat = 0, B: CGFloat = 0, A: CGFloat = 0
+		
+		if getHue(&H, saturation: &S, brightness: &B, alpha: &A) {
+			B += (brightness - 1.0)
+			B = max(min(B, 1.0), 0.0)
+			
+			return UIColor(hue: H, saturation: S, brightness: B, alpha: A)
+		}
+		
+		return self
+	}
+}
+
+extension UIColor {
+	func brighten(by factor: CGFloat) -> UIColor {
+		var fRed : CGFloat = 0
+		var fGreen : CGFloat = 0
+		var fBlue : CGFloat = 0
+		var fAlpha: CGFloat = 0
+		if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
+			fRed = min(1.0, max(0, fRed + (1.0 * factor)))
+			fGreen = min(1.0, max(0, fGreen + (1.0 * factor)))
+			fBlue = min(1.0, max(0, fBlue + (1.0 * factor)))
+			return UIColor(red: fRed, green: fGreen, blue: fBlue, alpha: fAlpha)
+		}
+		return self
+	}
+	
+	func brighten(by factor: Double) -> UIColor {
+		return brighten(by: CGFloat(factor))
+	}
 }
