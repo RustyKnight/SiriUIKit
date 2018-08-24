@@ -169,31 +169,29 @@ public class SiriQueryView: UIView {
 		context.addPath(path)
 		context.clip()
 
-//		let components: [CGFloat] = [
-//			1.0, 1.0, 1.0, 0.8,
-//			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.6,
-//			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.4
-//		]
-//		let colorSpace = CGColorSpaceCreateDeviceRGB()
-//		let locations: [CGFloat] = [0.5, 0.05, 1.0]
-//		guard let gradient = CGGradient(colorSpace: colorSpace,
-//																		colorComponents: components,
-//																		locations: locations,
-//																		count: 3) else {
-//																			fatalError("Could not create gradient")
-//		}
-//
-//		let startPoint = CGPoint(x: width / 2, y: height / 2)
-//		let endPoint = CGPoint(x: width / 2, y: height / 2 - (height * CGFloat(sign) / 2))
-//		context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+		let components: [CGFloat] = [
+			1.0, 1.0, 1.0, 0.8,
+			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.6,
+			colors[index][0] / 256.0, colors[index][1] / 256.0, colors[index][2] / 256.0, 0.4
+		]
+		let colorSpace = CGColorSpaceCreateDeviceRGB()
+		let locations: [CGFloat] = [0.0, 0.05, 1.0]
+		guard let gradient = CGGradient(colorSpace: colorSpace,
+																		colorComponents: components,
+																		locations: locations,
+																		count: 3) else {
+																			fatalError("Could not create gradient")
+		}
 
-//		let alpha = CGFloat.random(in: 0.4...0.6)
+		let startPoint = CGPoint(x: width / 2, y: height / 2)
+		let endPoint = CGPoint(x: width / 2, y: height / 2 - (height * CGFloat(sign) / 2))
+		context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
 		
-		let delta = min(1, max(0, amp[index] * volumn))
-		let alpha = 1 - min(1, max(0, (colors[index][3] / 256.0) * delta))
-		let color = UIColor(red: colors[index][0] / 256.0, green: colors[index][1] / 256.0, blue: colors[index][2] / 256.0, alpha: alpha)
-		color.setFill()
-		context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+//		let delta = min(1, max(0, amp[index] * volumn))
+//		let alpha = 1 - min(1, max(0, (colors[index][3] / 256.0) * delta))
+//		let color = UIColor(red: colors[index][0] / 256.0, green: colors[index][1] / 256.0, blue: colors[index][2] / 256.0, alpha: alpha)
+//		color.setFill()
+//		context.fill(CGRect(x: 0, y: 0, width: width, height: height))
 		context.restoreGState()
 	}
 	
