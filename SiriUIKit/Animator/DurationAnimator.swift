@@ -47,7 +47,7 @@ public class DurationAnimator: Animator {
 	}
 	
 	override public func tick() {
-		guard let startedAt = startedAt else {
+        guard startedAt != nil else {
 			return
 		}
 		defer {

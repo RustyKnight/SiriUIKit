@@ -14,45 +14,45 @@ import UIKit
 // They can be used to calculate the current value between two points based on
 // a given progression point
 public extension Range where Bound == Double {
-	public func value(at point: Double) -> Double {
-		// Normalise the progression
-		let progress = Swift.min(1.0, Swift.max(0.0, point))
-		let lower = lowerBound
-		let upper = upperBound
-		let distant = upper - lower
-		return (distant * progress) + lower
-	}
+    func value(at point: Double) -> Double {
+        // Normalise the progression
+        let progress = Swift.min(1.0, Swift.max(0.0, point))
+        let lower = lowerBound
+        let upper = upperBound
+        let distant = upper - lower
+        return (distant * progress) + lower
+    }
 }
 
 public extension Range where Bound == Int {
-	func value(at point: Double) -> Int {
-		// Normalise the progression
-		let progress = Swift.min(1.0, Swift.max(0.0, point))
-		let lower = lowerBound
-		let upper = upperBound
-		let distant = upper - lower
-		return Int(round((Double(distant) * progress))) + lower
-	}
+    func value(at point: Double) -> Int {
+        // Normalise the progression
+        let progress = Swift.min(1.0, Swift.max(0.0, point))
+        let lower = lowerBound
+        let upper = upperBound
+        let distant = upper - lower
+        return Int(round((Double(distant) * progress))) + lower
+    }
 }
 
 public extension ClosedRange where Bound == Int {
-	public func value(at point: Double) -> Int {
-		// Normalise the progression
-		let progress = Swift.min(1.0, Swift.max(0.0, point))
-		let lower = lowerBound
-		let upper = upperBound
-		let distant = upper - lower
-		return Int(round((Double(distant) * progress))) + lower
-	}
+    func value(at point: Double) -> Int {
+        // Normalise the progression
+        let progress = Swift.min(1.0, Swift.max(0.0, point))
+        let lower = lowerBound
+        let upper = upperBound
+        let distant = upper - lower
+        return Int(round((Double(distant) * progress))) + lower
+    }
 }
 
 public extension ClosedRange where Bound == Double {
-	public func value(at point: Double) -> Double {
-		// Normalise the progression
-		let progress = Swift.min(1.0, Swift.max(0.0, point))
-		let lower = lowerBound
-		let upper = upperBound
-		let distant = upper - lower
-		return (distant * progress) + lower
-	}
+    func value(at point: Double) -> Double {
+        // Normalise the progression
+        let progress = Swift.min(1.0, Swift.max(0.0, point))
+        let lower = lowerBound
+        let upper = upperBound
+        let distant = upper - lower
+        return (distant * progress) + lower
+    }
 }
